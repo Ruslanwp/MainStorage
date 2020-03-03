@@ -1,0 +1,109 @@
+#elem {
+	display: none;
+	width: 200px;
+	height: 200px;
+	border: 1px solid green;
+}
+
+#elem.active {
+	display: block;
+}
+
+.block {
+	margin: 0 auto;
+	border-radius: 50%;
+	background: #24ffd7;
+	height: 200px;
+	width: 200px;
+	border: 5px solid salmon;
+	position: relative;
+}
+
+#position {
+	margin: auto;
+  position: absolute;
+  margin-top:43%;
+   left: 0;  right: 0;
+
+}
+
+#border-size {
+	border: 20px solid gold;
+
+}
+
+#border-size p {
+	text-align: center;
+
+}
+
+#oval {
+	background: darkcyan;
+	height: 60px;
+	width: 100px;
+	border-radius: 50%;
+	border: 3px solid;
+	margin: 20px;
+}
+
+#square {
+	height: 100px;
+	width: 100px;
+	background-color: darkred;
+	border: 2px solid lawngreen;
+	padding: 10px;
+}
+
+
+#horizontalScroll {
+	width: 150px;
+	overflow: auto;
+	white-space: nowrap;
+	border: 1px solid #000;
+}
+
+#verticalScroll {
+	height: 100px;
+	width: 150px;
+	overflow: auto;
+	white-space: normal;
+	border: 1px solid rgb(253, 36, 36);
+}
+
+
+#scrolling {
+	height: 200px;
+	width: 150px;
+	overflow: auto;
+	white-space: normal;
+	border: 5px solid rgb(30, 0, 202);
+}
+
+#doubleScroll  {
+	display: block;
+	height: 200px;
+	width: 300px;
+	overflow-x: scroll;
+	overflow-y: scroll;
+	border: 2px dotted rgb(245, 82, 172);
+}
+
+#circle {
+	width: 500px;
+	height: 500px;
+	border-radius: 100%;
+	border: 3px solid springgreen;
+	margin:0 auto;
+	position: relative;
+}
+
+#circle:hover {
+	cursor: pointer;
+	
+}
+
+#circle_btn {
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 50; right: 0;
+}
