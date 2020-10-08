@@ -1,19 +1,17 @@
-let upperCase = /[A-Z]/g;
+let upperCase = /[A-Z]/;
 let lowerCase = /[a-z]/g;
 let numbers = /[0-9]/g;
 let allow = /[A-Za-z0-9]/g;
 
-
 document.getElementById('password').onkeypress = function(event){
    if (event.key.match(allow)){
         return true;
-    }else {
-        return false;
     }
+    return false;  
 }
 
-document.getElementById('password').onkeyup= function(event){
-    let myPasswordValue = document.getElementById('password').value
+document.getElementById('password').onkeyup = function(event){
+   let myPasswordValue = document.getElementById('password').value;
    let barScale = document.querySelector('#barScale');
 
 function isStringHasNumbers(myPasswordValue){
@@ -23,77 +21,84 @@ function isStringHasNumbers(myPasswordValue){
     return false;
 }
 
-isStringHasNumbers(myPasswordValue)// вызов функции
-
 function isStringHasUpperCase(myPasswordValue){
-    for (let i=0; i<myPasswordValue.length; i++){
-        if (!myPasswordValue[i].match(numbers) && myPasswordValue[i] == myPasswordValue[i].toUpperCase()){
-            return true;
-        }
+    if (myPasswordValue.match(upperCase)){
+        return true;
     }
     return false;
 }
-
-isStringHasUpperCase(myPasswordValue)// вызов функции
 
 function isStringHasLowerCase(myPasswordValue){
-    for (let i=0; i<myPasswordValue.length; i++){
-        if (!myPasswordValue[i].match(numbers) && myPasswordValue[i] == myPasswordValue[i].toLowerCase()){
-            return true;
-        }
+    if (myPasswordValue.match(lowerCase)){
+        return true;
     }
     return false;
 }
 
-isStringHasLowerCase(myPasswordValue)// вызов функции
-
-function setProgressBar(color, width){
-    barScale.classList.add(color)
-    barScale.setAttribute('style', width)
-}
-
-function removeProgressBar(color, width){
-    barScale.classList.remove(color, width);
+function isValid(myPasswordValue){
+    if (isStringHasNumbers(myPasswordValue) &&
+    isStringHasUpperCase(myPasswordValue) &&
+    isStringHasLowerCase(myPasswordValue)){
+        return true;
+    }
+    return false;
 }
 
 if (myPasswordValue.length == myPasswordValue.length){
-    barScale.setAttribute('style', 'width:0%')
+    barScale.setAttribute('style', 'width:0%');
 }
 // убрал баг с прогресс баром (перебил бутстрап стили)
 
-// if (myPasswordValue )
-
-function passwordLow(){
+function isPasswordLow(myPasswordValue){
     if (myPasswordValue.length >0 &&
         myPasswordValue.length <6){
-            return setProgressBar('bg-danger', 'width:33%');
+            return true;
         }
-    return removeProgressBar('bg-danger', 'width:0%');  
+    return false;  
 }
 
-function passwordMedium(){
+function isPasswordMedium(myPasswordValue){
     if (myPasswordValue.length >= 6 && 
          myPasswordValue.length <= 8 &&
-        isStringHasLowerCase(myPasswordValue)  &&
-        isStringHasUpperCase(myPasswordValue)  &&
-        isStringHasNumbers(myPasswordValue)){
-            return setProgressBar('bg-warning', 'width:67%');
+         isValid(myPasswordValue)){
+            return true;
         }
-        return removeProgressBar('bg-warning', 'width:0%')
+        return false; 
     }
     
-function passwordHigh(){
+function isPasswordHigh(myPasswordValue){
     if (myPasswordValue.length >8 && 
-        isStringHasLowerCase(myPasswordValue) &&
-        isStringHasUpperCase(myPasswordValue) &&
-        isStringHasNumbers(myPasswordValue)){
-            return setProgressBar('bg-success', 'width:100%');
+        isValid(myPasswordValue)){
+            return true;
         } 
-    return removeProgressBar('bg-success', 'width:0%')    
+        return false ;     
 }
 
-passwordLow();
-passwordMedium();
-passwordHigh();
+function setProgressBar(setLength, color){
+    barScale.setAttribute('style', 'width:'+ setLength +'%')
+    if (setLength == 33){
+        barScale.style.background = color;
+    } 
+    if (setLength == 67){
+        barScale.style.background = color;
+    }
+    if (setLength == 100){
+        barScale.style.background = color;
+    }
+}
 
+function checkPassword(myPasswordValue){
+    if (isPasswordLow(myPasswordValue)){
+        return setProgressBar(33, 'red');
+    } 
+    if (isPasswordMedium(myPasswordValue)){
+        return setProgressBar(67, 'yellow');
+    }  
+    if (isPasswordHigh(myPasswordValue)){
+        return setProgressBar(100, '#cddc39');
+    }
+    return false;
+}
+
+checkPassword(myPasswordValue);
 }
