@@ -60,9 +60,6 @@ function isValid(myPasswordValue){
     return false;
 }
 
-
-// убрал баг с прогресс баром (перебил бутстрап стили)
-
 function isPasswordLow(myPasswordValue){
     if (myPasswordValue.length >0 &&
         myPasswordValue.length <6 || 
@@ -105,15 +102,15 @@ function setProgressBar(setLength){
 
 function checkPassword(myPasswordValue){
     if (isPasswordLow(myPasswordValue)){
-        return setProgressBar(13);
+        return setProgressBar(33);
     } 
     if (isPasswordMedium(myPasswordValue)){
-        return setProgressBar(74);
+        return setProgressBar(67);
     }  
     if (isPasswordHigh(myPasswordValue)){
-        return setProgressBar(92);
+        return setProgressBar(100);
     }
-    return false;
+    return setProgressBar(0);
 }
 
 checkPassword(myPasswordValue);
