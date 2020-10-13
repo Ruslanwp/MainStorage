@@ -3,6 +3,22 @@ let lowerCase = /[a-z]/g;
 let numbers = /[0-9]/g;
 let allow = /[A-Za-z0-9]/g;
 
+
+
+document.getElementById('phone').onkeypress = function(event){
+    if (event.key.match(numbers) || event.key == '+'){
+         return true;
+     }
+     return false;  
+}
+
+document.getElementById('phone').onkeyup = function(event){
+    let myPhoneValue = document.getElementById('phone').value;
+    console.log(myPhoneValue);
+
+   
+}
+
 document.getElementById('password').onkeypress = function(event){
    if (event.key.match(allow)){
         return true;
@@ -44,14 +60,14 @@ function isValid(myPasswordValue){
     return false;
 }
 
-if (myPasswordValue.length == myPasswordValue.length){
-    barScale.setAttribute('style', 'width:0%');
-}
+
 // убрал баг с прогресс баром (перебил бутстрап стили)
 
 function isPasswordLow(myPasswordValue){
     if (myPasswordValue.length >0 &&
-        myPasswordValue.length <6){
+        myPasswordValue.length <6 || 
+        myPasswordValue.length >0 &&
+        isValid(myPasswordValue) == false){
             return true;
         }
     return false;  
@@ -74,28 +90,28 @@ function isPasswordHigh(myPasswordValue){
         return false ;     
 }
 
-function setProgressBar(setLength, color){
+function setProgressBar(setLength){
     barScale.setAttribute('style', 'width:'+ setLength +'%')
-    if (setLength == 33){
-        barScale.style.background = color;
+    if (setLength > 0 && setLength <= 33){
+        barScale.style.background = 'red';
     } 
-    if (setLength == 67){
-        barScale.style.background = color;
+    if (setLength > 33 && setLength <= 67){
+        barScale.style.background = 'yellow';
     }
-    if (setLength == 100){
-        barScale.style.background = color;
+    if (setLength > 67 && setLength <= 100){
+        barScale.style.background = '#cddc39';
     }
 }
 
 function checkPassword(myPasswordValue){
     if (isPasswordLow(myPasswordValue)){
-        return setProgressBar(33, 'red');
+        return setProgressBar(13);
     } 
     if (isPasswordMedium(myPasswordValue)){
-        return setProgressBar(67, 'yellow');
+        return setProgressBar(74);
     }  
     if (isPasswordHigh(myPasswordValue)){
-        return setProgressBar(100, '#cddc39');
+        return setProgressBar(92);
     }
     return false;
 }
